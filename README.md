@@ -42,12 +42,14 @@ API предоставляет следующие конечные точки:
 Для аутентификации пользователя отправьте POST-запрос на следующий адрес:
 URL: http://localhost:8083/api/v1/auth/login
 Тело запроса должно содержать имя пользователя (username) и пароль (password):
+**Тело запроса**
 json { 
 "username": "test1",
 "password": "testtest"
 } 
 
 Ответ будет содержать идентификатор пользователя (user_id), JWT-токен (token), время выдачи токена (issued_at) и время его истечения (expires_at):
+**Ответ**
 json { 
 "user_id": 2,
 "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJwcm9zZWx5dGUiLCJleHAiOjE2OTUwMzg3MzcsImlhdCI6MTY5NTAzNTEzNywianRpIjoiNTVmODlhYWMtMjU5YS00OWEzLThmNTEtNzM4M2UwODc4YjNjIiwidXNlcm5hbWUiOiJ0ZXN0MSJ9.0D3P3RbRwDe4nob62fxXRpUqEdS8W_bbX06PT9_35a4",
@@ -59,6 +61,7 @@ json {
 Чтобы зарегистрировать нового пользователя, отправьте POST-запрос на следующий адрес:
 URL: http://localhost:8083/api/v1/auth/register
 Тело запроса должно содержать имя пользователя (username), пароль (password), имя (first_name) и фамилию (last_name):
+**Тело запроса**
 json { 
 "username": "test1",
 "password": "testtest",
@@ -67,6 +70,7 @@ json {
 } 
 
 Ответ будет содержать информацию о созданном пользователе:
+**Ответ**
 json { 
 "id": 2,
 "username": "test1",
@@ -80,9 +84,16 @@ json {
 ### Получение информации о текущем пользователе
 Для получения информации о текущем пользователе отправьте GET-запрос на следующий адрес с указанным JWT-токеном:
 URL: http://localhost:8083/api/v1/auth/info
+
+
 В заголовке запроса укажите авторизацию с типом "Bearer" и токеном:
+
+**Тело запроса**
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJwcm9zZWx5dGUiLCJleHAiOjE2OTUwMzg3MzcsImlhdCI6MTY5NTAzNTEzNywianRpIjoiNTVmODlhYWMtMjU5YS00OWEzLThmNTEtNzM4M2UwODc4YjNjIiwidXNlcm5hbWUiOiJ0ZXN0MSJ9.0D3P3RbRwDe4nob62fxXRpUqEdS8W_bbX06PT9_35a4
+
+
 Ответ будет содержать информацию о текущем пользователе:
+**Ответ**
 json {
 "id": 2,
 "username": "test1",
