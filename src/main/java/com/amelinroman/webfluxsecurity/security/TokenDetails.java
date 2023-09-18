@@ -7,6 +7,12 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * @author Amelin Roman
+ * Класс TokenDetails содержит информацию о JWT-токене и его сроке действия.
+ * Этот класс используется для передачи информации о токене между методами и слоями приложения.
+ */
+
 @Data
 @Builder(toBuilder = true)
 @NoArgsConstructor
