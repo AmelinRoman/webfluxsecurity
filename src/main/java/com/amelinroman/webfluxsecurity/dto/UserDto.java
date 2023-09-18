@@ -8,6 +8,11 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * @author Amelin Roman
+ * Класс UserDto представляет собой объект передачи данных (Data Transfer Object) для пользователей.
+ * Используется для передачи данных между слоями приложения и взаимодействия с внешними API и клиентами.
+ */
 @Data
 @JsonNaming(PropertyNamingStrategy.SnakeCaseStrategy.class)
 public class UserDto {
@@ -16,8 +21,8 @@ public class UserDto {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
     private UserRole role;
-    private String firstname;
-    private String lastname;
+    private String firstName;
+    private String lastName;
     private boolean enabled;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;

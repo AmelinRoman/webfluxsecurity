@@ -17,6 +17,13 @@ import org.springframework.security.web.server.authentication.AuthenticationWebF
 import org.springframework.security.web.server.util.matcher.ServerWebExchangeMatchers;
 import reactor.core.publisher.Mono;
 
+/**
+ * Конфигурация безопасности на основе {@link WebSecurityConfig} для веб-приложений,
+ * использующих реактивную архитектуру. Класс использует аннотацию \@Slf4j для
+ * логирования.
+ * Этот класс настраивает правила доступа к различным маршрутам и обработку ошибок
+ * аутентификации и авторизации.
+ */
 @Slf4j
 @Configuration
 @EnableReactiveMethodSecurity
@@ -25,8 +32,19 @@ public class WebSecurityConfig {
     @Value("${jwt.secret}")
     private String secret;
 
+    /**
+     * Открытые маршруты, доступные без аутентификации.
+     */
     private final String[] publicRoutes = {"/api/v1/auth/register", "/api/v1/auth/login"};
 
+    /**
+     * Настройка фильтров и правил для доступа к маршрутам, а также обработка
+     * ошибок аутентификации и авторизации.
+     *
+     * @param http HttpSecurity для настройки базовых правил доступа.
+     * @param authenticationManager Аутентификационный менеджер, необходимый для создания фильтра аутентификации.
+     * @return SecurityWebFilterChain с настроенными правилами доступа и обработкой ошибок.
+     */
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http, AuthenticationManager authenticationManager) {
         return http
@@ -40,12 +58,13 @@ public class WebSecurityConfig {
                 .authenticated()
                 .and()
                 .exceptionHandling()
-                .authenticationEntryPoint((swe, e) -> {
+                .authenticationEntryPoint((swe , e) -> {
                     log.error("IN securityWebFilterChain - unauthorized error: {}", e.getMessage());
                     return Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.UNAUTHORIZED));
                 })
                 .accessDeniedHandler((swe, e) -> {
                     log.error("IN securityWebFilterChain - access denied: {}", e.getMessage());
+
                     return Mono.fromRunnable(() -> swe.getResponse().setStatusCode(HttpStatus.FORBIDDEN));
                 })
                 .and()
@@ -53,7 +72,13 @@ public class WebSecurityConfig {
                 .build();
     }
 
-
+    /**
+     * Создает фильтр аутентификации с использованием токена Bearer для
+     * аутентификации пользователей.
+     *
+     * @param authenticationManager Аутентификационный менеджер, используемый для проверки подлинности пользователей.
+     * @return AuthenticationWebFilter с настроенными поведением аутентификации, использующим Bearer-токены.
+     */
     private AuthenticationWebFilter bearerAuthenticationFilter(AuthenticationManager authenticationManager) {
         AuthenticationWebFilter bearerAuthenticationFilter = new AuthenticationWebFilter(authenticationManager);
         bearerAuthenticationFilter.setServerAuthenticationConverter(new BearerTokenServerAuthenticationConverter(new JwtHandler(secret)));

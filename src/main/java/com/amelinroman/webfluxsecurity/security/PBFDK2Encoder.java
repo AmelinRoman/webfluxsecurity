@@ -10,6 +10,12 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.Base64;
 
+/**
+ * @author Amelin Roman
+ * Компонент PBFDK2Encoder реализует интерфейс PasswordEncoder для кодирования и сравнения
+ * паролей с использованием PBKDF2 и HmacSHA512.
+ */
+
 @Component
 public class PBFDK2Encoder implements PasswordEncoder {
 
@@ -21,6 +27,14 @@ public class PBFDK2Encoder implements PasswordEncoder {
     private Integer keyLength;
 
     private static final String SECRET_KEY_INSTANCE = "PBKDF2WithHmacSHA512";
+
+    /**
+     * Кодирует пароль с использованием алгоритма PBKDF2 и HmacSHA512.
+     *
+     * @param rawPassword некодированный пароль, который требуется закодировать.
+     * @return закодированная строка пароля.
+     * @throws RuntimeException если алгоритм шифрования недоступен или ключ некорректен.
+     */
     @Override
     public String encode(CharSequence rawPassword) {
         try {
@@ -33,6 +47,13 @@ public class PBFDK2Encoder implements PasswordEncoder {
         }
     }
 
+    /**
+     * Сравнивает некодированный пароль с закодированным паролем.
+     *
+     * @param rawPassword     некодированный пароль для проверки.
+     * @param encodedPassword закодированный пароль для сравнения.
+     * @return true, если пароли совпадают, иначе false.
+     */
     @Override
     public boolean matches(CharSequence rawPassword, String encodedPassword) {
         return encode(rawPassword).equals(encodedPassword);
