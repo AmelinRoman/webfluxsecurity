@@ -48,14 +48,8 @@ URL: http://localhost:8083/api/v1/auth/login
 
 ```json
 {
-
-
 "username": "test1",
-
-
 "password": "testtest"
-
-
 }
 ```
 
@@ -66,20 +60,10 @@ URL: http://localhost:8083/api/v1/auth/login
 
 ```json
 { 
-
-
 "user_id": 2,
-
-
 "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlVTRVIiLCJpc3MiOiJwcm9zZWx5dGUiLCJleHAiOjE2OTUwMzg3MzcsImlhdCI6MTY5NTAzNTEzNywianRpIjoiNTVmODlhYWMtMjU5YS00OWEzLThmNTEtNzM4M2UwODc4YjNjIiwidXNlcm5hbWUiOiJ0ZXN0MSJ9.0D3P3RbRwDe4nob62fxXRpUqEdS8W_bbX06PT9_35a4",
-
-
 "issued_at": "2023-09-18T11:05:37.851+00:00",
-
-
 "expires_at": "2023-09-18T12:05:37.851+00:00"
-
-
 }
 ```
 
@@ -93,17 +77,9 @@ URL: http://localhost:8083/api/v1/auth/register
 
 ```json
 { 
-
-
 "username": "test1",
-
-
 "password": "testtest",
-
-
 "first_name": "Vasya",
-
-
 "last_name": "Pypkin"
 }
 ```
@@ -115,31 +91,14 @@ URL: http://localhost:8083/api/v1/auth/register
 
 ```json
 { 
-
-
 "id": 2,
-
-
 "username": "test1",
-
-
 "role": "USER",
-
-
 "first_name": "Vasya",
-
-
 "last_name": "Pypkin",
-
-
 "enabled": true,
-
-
 "created_at": "2023-09-18T11:49:52.756184",
-
-
 "updated_at": "2023-09-18T11:49:52.756199"
-
 }
 ```
 
@@ -164,28 +123,13 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIyIiwicm9sZSI6IlVTRVIiLCJpc
 ```json
 {
 
-
 "id": 2,
-
-
 "username": "test1",
-
-
 "role": "USER",
-
-
 "first_name": "Vasya",
-
-
 "last_name": "Pypkin",
-
-
 "enabled": true,
-
-
 "created_at": "2023-09-18T11:49:52.756184",
-
-
 "updated_at": "2023-09-18T11:49:52.756199"
 }
 ```
